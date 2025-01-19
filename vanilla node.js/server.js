@@ -6,14 +6,14 @@ import homePage from "./views/home/index.html.js";
 import styles from "./content/styles/site.css.js";
 
 http.createServer((req, res) => {
-    if (req.url.includes("/styles/site.css")) {
-        res.writeHead(200, { "content-type": "text/css" });
-        res.write(styles);
+    function handleGetRequiest(contentType, file) {
+        res.writeHead(200, { "content-type": contentType });
+        res.write(file);
         return res.end();
     }
 
-    res.writeHead(200, { "content-type": "text/html" });
-    res.write(homePage);
-    return res.end();
+    if (req.url.includes("/styles/site.css")) return handleGetRequiest("text/css", styles);
+
+    return handleGetRequiest("text/html", homePage);
 }).listen(PORT);
 console.log(`Server listening on port: ${PORT}`);
