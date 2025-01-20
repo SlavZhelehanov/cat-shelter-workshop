@@ -8,6 +8,7 @@ import styles from "./content/styles/site.css.js";
 import createCatPage from "./views/addCat.html.js";
 import addBreedPage from "./views/addBreed.html.js";
 import newHome from "./views/catShelter.html.js";
+import editPage from "./views/editCat.html.js";
 
 async function readJsonData(file) {
     try {
@@ -40,6 +41,11 @@ http.createServer((req, res) => {
         const id = req.url.split("/")[2];
         const cat = cats.find(c => c.id === id);
         if (cat) return handleGetRequiest("text/html", newHome(cat));
+    }
+    if (req.url.includes("/change-info")) {
+        const id = req.url.split("/")[2];
+        const cat = cats.find(c => c.id === id);
+        return handleGetRequiest("text/html", editPage(cat, breeds));
     }
 
     return handleGetRequiest("text/html", homePage(cats));
