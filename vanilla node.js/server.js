@@ -7,6 +7,7 @@ import homePage from "./views/home/index.html.js";
 import styles from "./content/styles/site.css.js";
 import createCatPage from "./views/addCat.html.js";
 import addBreedPage from "./views/addBreed.html.js";
+import newHome from "./views/catShelter.html.js";
 
 async function readJsonData(file) {
     try {
@@ -35,6 +36,11 @@ http.createServer((req, res) => {
     if (req.url.includes("/styles/site.css")) return handleGetRequiest("text/css", styles);
     if (req.url.includes("/add-cat")) return handleGetRequiest("text/html", createCatPage(breeds));
     if (req.url.includes("/add-breed")) return handleGetRequiest("text/html", addBreedPage);
+    if (req.url.includes("/new-home")) {
+        const id = req.url.split("/")[2];
+        const cat = cats.find(c => c.id === id);
+        if (cat) return handleGetRequiest("text/html", newHome(cat));
+    }
 
     return handleGetRequiest("text/html", homePage(cats));
 }).listen(PORT);

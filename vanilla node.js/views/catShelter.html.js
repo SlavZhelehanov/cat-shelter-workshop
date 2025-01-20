@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+export default cat => `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,29 +14,30 @@
     <header>
         <nav>
             <ul class="navigation">
-                <li><a href="">Home Page</a></li>
-                <li><a href="">Add Breed</a></li>
-                <li><a href="">Add Cat</a></li>
+                <li><a href="/">Home Page</a></li>
+                <li><a href="/cats/add-breed">Add Breed</a></li>
+                <li><a href="/cats/add-cat">Add Cat</a></li>
             </ul>
         </nav>
         <h1>Cat Shelter</h1>
     </header>
     <main>
-        <form action="#" method="" class="cat-form">
+        <form action="/cat/${cat.id}/new-home" method="POST" class="cat-form">
+            <input type="hiden" id="hiden" name="hiden" value="${cat.name}">
             <h2>Shelter the cat</h2>
-            <img src="https://cdn.pixabay.com/photo/2015/03/27/13/16/cat-694730_1280.jpg" alt="">
+            <img src="${cat.image}" alt="">
             <label for="name">Name</label>
-            <input type="text" id="name" value="Pretty Kitty" disabled>
+            <input type="text" id="name" value="${cat.name}" disabled>
             <label for="description">Description</label>
-            <textarea id="description" disabled>Dominant and aggressive to other cats. Will probably eat you in your sleep. Very cute tho.</textarea>
+            <textarea id="description" disabled>${cat.description}</textarea>
             <label for="group">Breed</label>
             <select id="group" disabled>
-                <option value="Fluffy Cat">Fluffy Cat</option>
+                <option value="${cat.breed}">${cat.breed}</option>
             </select>
-            <button>SHELTER THE CAT</button>
+            <button type="submit">SHELTER THE CAT</button>
         </form>
     </main>
 </body>
 
 
-</html>
+</html>`;
