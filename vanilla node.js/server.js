@@ -5,6 +5,7 @@ const PORT = 3000;
 
 import homePage from "./views/home/index.html.js";
 import styles from "./content/styles/site.css.js";
+import createCatPage from "./views/addCat.html.js";
 
 async function readJsonData(file) {
     try {
@@ -31,6 +32,7 @@ http.createServer((req, res) => {
     }
 
     if (req.url.includes("/styles/site.css")) return handleGetRequiest("text/css", styles);
+    if (req.url.includes("/add-cat")) return handleGetRequiest("text/html", createCatPage(breeds));
 
     return handleGetRequiest("text/html", homePage(cats));
 }).listen(PORT);

@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+import breed from "./breed.js";
+
+export default breeds => `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -22,23 +24,23 @@
         <h1>Cat Shelter</h1>
     </header>
     <main>
-        <form action="#" method="" class="cat-form" enctype="multipart/form-data">
+        <form action="/cats/add-cat" method="POST" class="cat-form" >
             <h2>Add Cat</h2>
             <label for="name">Name</label>
             <input name="name" type="text" id="name">
             <label for="description">Description</label>
             <textarea name="description" id="description"></textarea>
             <label for="image">Image</label>
-            <input name="upload" type="file" id="image">
+            <input name="image" type="text" id="image">
+            <label for="price">Price</label>
+            <input name="price" type="number" id="price">
             <label for="group">Breed</label>
             <select name="breed" id="group">
-                <option value="Fluffy Cat">Fluffy Cat</option>
-				<option value="Fluffy Cat">Fluffy Cat</option>
-				<option value="Fluffy Cat">Fluffy Cat</option>
+                ${breeds.map(m => m = breed(m)).join("\n")}
             </select>
             <button type="submit">Add Cat</button>
         </form>
     </main>
 </body>
 
-</html>
+</html>`;
