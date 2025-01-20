@@ -27,6 +27,8 @@ cats = JSON.parse(cats);
 let breeds = await readJsonData("breeds");
 breeds = JSON.parse(breeds);
 
+let filtered = [];
+
 http.createServer((req, res) => {
     function handleGetRequiest(contentType, file) {
         res.writeHead(200, { "content-type": contentType });
@@ -47,6 +49,7 @@ http.createServer((req, res) => {
         const cat = cats.find(c => c.id === id);
         return handleGetRequiest("text/html", editPage(cat, breeds));
     }
+    if (req.url.includes("/search")) return handleGetRequiest("text/html", searchPage(filtered));
 
     return handleGetRequiest("text/html", homePage(cats));
 }).listen(PORT);
