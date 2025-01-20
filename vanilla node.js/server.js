@@ -32,6 +32,6 @@ http.createServer((req, res) => {
 
     if (req.url.includes("/styles/site.css")) return handleGetRequiest("text/css", styles);
 
-    return handleGetRequiest("text/html", homePage);
+    return handleGetRequiest("text/html", homePage(cats));
 }).listen(PORT);
 console.log(`Server listening on port: ${PORT}`);
