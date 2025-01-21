@@ -82,6 +82,12 @@ http.createServer((req, res) => {
                     await writeJsonData("cats", cats);
                 }
             });
+        } else if (req.url.includes("/new-home")) {
+            const id = req.url.split("/")[2];
+            cats = cats.filter(f => f.id != id);
+
+            console.log(id);
+            
         }
 
         res.writeHead(302, { "location": "/" });
