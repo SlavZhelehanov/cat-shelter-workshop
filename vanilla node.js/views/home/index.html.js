@@ -1,4 +1,4 @@
-import cat from "../cat.js"
+import cat from "../cat.js";
 
 export default cats => `<!DOCTYPE html>
 <html lang="en">
@@ -23,9 +23,9 @@ export default cats => `<!DOCTYPE html>
             </ul>
         </nav>
         <h1>Cat Shelter</h1>
-        <form action="/search">
-            <input type="text">
-            <button type="button">Search</button>
+        <form action="/search" method="POST">
+            <input type="text" name="search">
+            <button type="submit">Search</button>
         </form>
     </header>
 
@@ -39,4 +39,4 @@ export default cats => `<!DOCTYPE html>
 
 </body>
 
-</html>`;
+</html>`

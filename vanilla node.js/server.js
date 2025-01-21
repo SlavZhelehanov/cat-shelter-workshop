@@ -10,6 +10,7 @@ import createCatPage from "./views/addCat.html.js";
 import addBreedPage from "./views/addBreed.html.js";
 import newHome from "./views/catShelter.html.js";
 import editPage from "./views/editCat.html.js";
+import searchPage from "./views/search.html.js";
 
 async function readJsonData(file) {
     try {
@@ -95,9 +96,18 @@ http.createServer((req, res) => {
                     await writeJsonData("cats", cats);
                 });
             }
+        } else if (req.url.includes("/search")) {
+            req.on("data", async data => {
+                let params = Object.fromEntries(new URLSearchParams(data.toString())).search.toLowerCase();
+                filtered = cats.filter(f => f.breed.toLowerCase().includes(params));
+            });
         }
 
-        res.writeHead(302, { "location": "/" });
+        if (req.url.includes("/search")) {
+            res.writeHead(302, { "location": "/search" });
+        } else {
+            res.writeHead(302, { "location": "/" });
+        }
         return res.end();
     }
 
