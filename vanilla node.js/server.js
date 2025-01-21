@@ -86,8 +86,10 @@ http.createServer((req, res) => {
             const id = req.url.split("/")[2];
             cats = cats.filter(f => f.id != id);
 
-            console.log(id);
-            
+            req.on("data", async data => {
+                console.log(data);
+                await writeJsonData("cats", cats);
+            });
         }
 
         res.writeHead(302, { "location": "/" });
