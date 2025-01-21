@@ -57,6 +57,13 @@ http.createServer((req, res) => {
                     await writeJsonData("cats", cats);
                 }
             });
+        } else if (req.url.includes("/add-breed")) {
+            req.on("data", async data => {
+                let params = Object.fromEntries(new URLSearchParams(data.toString())).breed;
+
+                console.log(params);
+                
+            });
         }
 
         res.writeHead(302, { "location": "/" });
