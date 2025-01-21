@@ -2,10 +2,10 @@
   {
     "id": "5f9b64c8-b5da-4744-bbcc-00f81d805838",
     "name": "Shekercho",
+    "description": "Dominant and aggressive to other cats. Will probably eat you in your sleep. Very cute tho.",
     "image": "https://cdn.pixabay.com/photo/2018/08/08/05/12/cat-3591348_1280.jpg",
-    "breed": "White Cat",
-    "price": 100,
-    "description": "Dominant and aggressive to other cats. Will probably eat you in your sleep. Very cute tho."
+    "price": 101,
+    "breed": "White Cat"
   },
   {
     "id": "bee6174a-af67-4cc5-947a-31be234fa273",
@@ -43,17 +43,9 @@
     "id": "d5949eb7-7307-49d7-a12c-fdd355616666",
     "name": "Julia",
     "description": "A generally healthy breed",
-    "image": "https://ce57fc7066a6b0aceccdd65b7baf04b69119dd74-m.proxy2.startpage.com/ub/ubdsfczd/xxx/ST/mRIv3T0d0CRSRUWsbvhVRCqYw//////////rassen/053422CoCo.jpg?SURFLY=R",
-    "price": 999,
+    "image": "https://cats.com/wp-content/uploads/2020/10/ragdoll-3-768x512.jpg",
+    "price": 1348,
     "breed": "Ragdoll"
-  },
-  {
-    "id": "d5949eb7-7307-49d7-a12c-fdd355618080",
-    "name": "Paul Duck",
-    "description": "Just pretty as can be",
-    "image": "https://53a056a1c70c3a4796dd574c731468b14db26533-m.proxy2.startpage.com/npd/tfmeevdubd/SR/mAEqViXksLZmSnZ8wM6UaKxjw//////////images/white-persian-cat-1000x500.jpg",
-    "price": 1050,
-    "breed": "Persian"
   },
   {
     "id": "5373013c-ad44-4ba0-8fea-027e7f979d43",

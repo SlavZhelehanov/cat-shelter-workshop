@@ -69,27 +69,32 @@ http.createServer((req, res) => {
         } else if (req.url.includes("/change-info")) {
             const id = req.url.split("/")[2];
 
-            req.on("data", async data => {
-                let params = Object.fromEntries(new URLSearchParams(data.toString()));
+            if (cats.some(cat => cat.id === id)) {
+                req.on("data", async data => {
+                    let params = Object.fromEntries(new URLSearchParams(data.toString()));
 
-                if (0 < params.name.length && 0 < params.description.length && 0 < params.image.length && 0 < params.price.length && 0 < params.breed.length) {
-                    for (let i = 0; i < cats.length; i++) {
-                        if (cats[i].id === id) {
-                            cats[i] = { id, ...params, price: +params.price };
-                            break;
+                    if (0 < params.name.length && 0 < params.description.length && 0 < params.image.length && 0 < params.price.length && 0 < params.breed.length) {
+                        for (let i = 0; i < cats.length; i++) {
+                            if (cats[i].id === id) {
+                                cats[i] = { id, ...params, price: +params.price };
+                                break;
+                            }
                         }
+                        await writeJsonData("cats", cats);
                     }
-                    await writeJsonData("cats", cats);
-                }
-            });
+                });
+            }
         } else if (req.url.includes("/new-home")) {
             const id = req.url.split("/")[2];
-            cats = cats.filter(f => f.id != id);
 
-            req.on("data", async data => {
-                console.log(data);
-                await writeJsonData("cats", cats);
-            });
+            if (cats.some(cat => cat.id === id)) {
+                cats = cats.filter(f => f.id != id);
+
+                req.on("data", async data => {
+                    console.log(data);
+                    await writeJsonData("cats", cats);
+                });
+            }
         }
 
         res.writeHead(302, { "location": "/" });
