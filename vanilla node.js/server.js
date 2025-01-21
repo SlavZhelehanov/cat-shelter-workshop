@@ -1,5 +1,6 @@
 import http from "http";
 import fs from "fs/promises";
+import { v4 as uuid } from "uuid";
 
 const PORT = 3000;
 
@@ -37,6 +38,20 @@ http.createServer((req, res) => {
     }
 
     if (req.url.includes("/styles/site.css")) return handleGetRequiest("text/css", styles);
+
+    if (req.method === "POST") {
+        if (req.url.includes("/add-cat")) {
+            req.on("data", async data => {
+                let params = Object.fromEntries(new URLSearchParams(data.toString()));
+
+                console.log(params);                
+            });
+        }
+
+        res.writeHead(302, { "location": "/" });
+        return res.end();
+    }
+
     if (req.url.includes("/add-cat")) return handleGetRequiest("text/html", createCatPage(breeds));
     if (req.url.includes("/add-breed")) return handleGetRequiest("text/html", addBreedPage);
     if (req.url.includes("/new-home")) {
