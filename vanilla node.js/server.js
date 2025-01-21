@@ -22,6 +22,14 @@ async function readJsonData(file) {
     }
 }
 
+async function writeJsonData(file, arr) {
+    try {
+        return await fs.writeFile(`./data/${file}.json`, JSON.stringify(arr, null, 2));
+    } catch (writeJsonDataErr) {
+        return console.log(`writeJsonDataErr: ${writeJsonDataErr}`);
+    }
+}
+
 let cats = await readJsonData("cats");
 cats = JSON.parse(cats);
 
@@ -44,7 +52,10 @@ http.createServer((req, res) => {
             req.on("data", async data => {
                 let params = Object.fromEntries(new URLSearchParams(data.toString()));
 
-                console.log(params);                
+                if (0 < params.name.length && 0 < params.description.length && 0 < params.image.length && 0 < params.price.length && 0 < params.breed.length) {
+                    cats.push({ id: uuid(), ...params, price: +params.price });
+                    await writeJsonData("cats", cats);
+                }
             });
         }
 

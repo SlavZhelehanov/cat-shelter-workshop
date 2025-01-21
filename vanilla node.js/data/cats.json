@@ -1,4 +1,5 @@
-[{
+[
+  {
     "id": "5f9b64c8-b5da-4744-bbcc-00f81d805838",
     "name": "Shekercho",
     "image": "https://cdn.pixabay.com/photo/2018/08/08/05/12/cat-3591348_1280.jpg",
@@ -53,4 +54,13 @@
     "image": "https://53a056a1c70c3a4796dd574c731468b14db26533-m.proxy2.startpage.com/npd/tfmeevdubd/SR/mAEqViXksLZmSnZ8wM6UaKxjw//////////images/white-persian-cat-1000x500.jpg",
     "price": 1050,
     "breed": "Persian"
-  }]
+  },
+  {
+    "id": "5373013c-ad44-4ba0-8fea-027e7f979d43",
+    "name": "Kiril",
+    "description": "Playful, energetic, affectionate, friendly",
+    "image": "https://cats.com/wp-content/uploads/2020/10/Kurilian_Bobtail.jpg",
+    "price": 780,
+    "breed": "Kurilian Bobtail"
+  }
+]
