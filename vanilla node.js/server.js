@@ -72,8 +72,15 @@ http.createServer((req, res) => {
             req.on("data", async data => {
                 let params = Object.fromEntries(new URLSearchParams(data.toString()));
 
-                console.log(params);
-                
+                if (0 < params.name.length && 0 < params.description.length && 0 < params.image.length && 0 < params.price.length && 0 < params.breed.length) {
+                    for (let i = 0; i < cats.length; i++) {
+                        if (cats[i].id === id) {
+                            cats[i] = { id, ...params, price: +params.price };
+                            break;
+                        }
+                    }
+                    await writeJsonData("cats", cats);
+                }
             });
         }
 
