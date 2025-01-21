@@ -54,5 +54,13 @@
     "image": "https://cats.com/wp-content/uploads/2020/10/Kurilian_Bobtail.jpg",
     "price": 780,
     "breed": "Kurilian Bobtail"
+  },
+  {
+    "id": "a6477aa7-b91a-4054-b4fb-30816cff3ab0",
+    "name": "Lev",
+    "description": "Playful, affectionate, curious, sociable",
+    "image": "https://cats.com/wp-content/uploads/2020/10/cute-Ukrainian-Levkoy.jpg",
+    "price": 555,
+    "breed": "Ukrainian Levkoy"
   }
 ]
