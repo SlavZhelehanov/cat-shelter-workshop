@@ -66,6 +66,15 @@ http.createServer((req, res) => {
                     await writeJsonData("breeds", breeds);
                 }
             });
+        } else if (req.url.includes("/change-info")) {
+            const id = req.url.split("/")[2];
+
+            req.on("data", async data => {
+                let params = Object.fromEntries(new URLSearchParams(data.toString()));
+
+                console.log(params);
+                
+            });
         }
 
         res.writeHead(302, { "location": "/" });
