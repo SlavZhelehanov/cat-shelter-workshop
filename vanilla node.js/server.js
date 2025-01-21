@@ -61,8 +61,10 @@ http.createServer((req, res) => {
             req.on("data", async data => {
                 let params = Object.fromEntries(new URLSearchParams(data.toString())).breed;
 
-                console.log(params);
-                
+                if (0 < params.length) {
+                    breeds.push(params);
+                    await writeJsonData("breeds", breeds);
+                }
             });
         }
 
