@@ -1,6 +1,7 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
 
+// DEFINE __dirname
 import path from 'path';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
@@ -8,9 +9,10 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
+// MIDDLEWARES
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: false }))
 
+// SETUP VIEW ENGINE
 app.engine('hbs', engine({
     layoutsDir: __dirname + '/views/layouts',
     extname: 'hbs',
@@ -20,8 +22,14 @@ app.engine('hbs', engine({
 app.set('view engine', 'hbs');
 app.set('views', './src/views');
 
-app.get('/', (req, res) => {
-    res.render('home');
-});
+// --------------------------------------- ROUTES ---------------------------------------
+// HOME
+app.get('/', (req, res) => { return res.render('home', { isHomePage: true }); });
+
+// ADD BREED
+app.get('/cats/add-breed', (req, res) => { return res.render('addBreed'); });
+
+// 404 LIKE
+app.all("*", (req, res) => { return res.redirect('/'); });
 
 app.listen(3000, console.log("Server is listening on port: 3000"));
