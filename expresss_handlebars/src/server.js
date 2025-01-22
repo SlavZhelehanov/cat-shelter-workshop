@@ -29,6 +29,9 @@ app.get('/', (req, res) => { return res.render('home', { isHomePage: true }); })
 // ADD BREED
 app.get('/cats/add-breed', (req, res) => { return res.render('addBreed'); });
 
+// ADD CAT
+app.get('/cats/add-cat', (req, res) => { return res.render('addCat'); });
+
 // 404 LIKE
 app.all("*", (req, res) => { return res.redirect('/'); });
 
