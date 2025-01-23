@@ -10,7 +10,9 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 // MIDDLEWARES
+server.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+server.use(express.urlencoded({ extended: true }));
 
 // SETUP VIEW ENGINE
 app.engine('hbs', engine({
@@ -28,6 +30,7 @@ app.get('/', (req, res) => { return res.render('home', { isHomePage: true }); })
 
 // ADD BREED
 app.get('/cats/add-breed', (req, res) => { return res.render('addBreed'); });
+app.post('/cats/add-breed', (req, res) => { return res.render('addBreed'); });
 
 // ADD CAT
 app.get('/cats/add-cat', (req, res) => { return res.render('addCat'); });
