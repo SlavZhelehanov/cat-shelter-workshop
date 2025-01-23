@@ -73,7 +73,14 @@ app.post('/cats/add-cat', (req, res) => {
         writeData(catsPath, cats);
         return res.redirect('/');
     }
-    return res.render('addCat', { isHomePage: false, breeds, cat });
+    return res.render('addCat', { breeds, cat });
+});
+
+// CAT SHELTER
+app.get('/cats/:id/new-home', (req, res) => {
+    const cat = cats.find(c => c.id === req.params.id);
+    if (!cat) return res.redirect('/404');
+    return res.render('catShelter', { cat });
 });
 
 // 404 LIKE
