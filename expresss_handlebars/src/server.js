@@ -9,6 +9,20 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
+// HANDLE READING/WRITING TO DATABASE
+function readData(file) {
+    const data = fs.readFileSync(file);
+    return JSON.parse(data);
+}
+
+function writeData(file, data) {
+    fs.writeFileSync(file, JSON.stringify(data, null, 2));
+}
+
+// GLOBAL VARIABLAS
+let cats = readData(catsPath);
+let breeds = readData(breedsPath);
+
 // MIDDLEWARES
 server.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -30,7 +44,6 @@ app.get('/', (req, res) => { return res.render('home', { isHomePage: true }); })
 
 // ADD BREED
 app.get('/cats/add-breed', (req, res) => { return res.render('addBreed'); });
-app.post('/cats/add-breed', (req, res) => { return res.render('addBreed'); });
 
 // ADD CAT
 app.get('/cats/add-cat', (req, res) => { return res.render('addCat'); });
