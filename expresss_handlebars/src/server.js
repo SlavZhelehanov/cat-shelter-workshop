@@ -76,7 +76,7 @@ app.post('/cats/add-cat', (req, res) => {
     return res.render('addCat', { breeds, cat });
 });
 
-// CAT SHELTER
+// DELETE CAT
 app.get('/cats/:id/new-home', (req, res) => {
     const cat = cats.find(c => c.id === req.params.id);
     if (!cat) return res.redirect('/404');
@@ -88,6 +88,13 @@ app.post('/cats/:id/new-home', (req, res) => {
     cats = cats.filter(c => c.id != req.params.id);
     writeData(catsPath, cats);
     return res.redirect('/');
+});
+
+// CHANGE INFO
+app.get('/cats/:id/change-info', (req, res) => {
+    const cat = cats.find(c => c.id === req.params.id);
+    if (!cat) return res.redirect('/404');
+    return res.render('editCat', { cat, breeds });
 });
 
 // 404 LIKE

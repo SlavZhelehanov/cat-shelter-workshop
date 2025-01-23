@@ -1,0 +1,21 @@
+<main>
+    <form action="/cats/{{cat.id}}/change-info" method="post" class="cat-form">
+        <h2>Edit Cat</h2>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" value="{{cat.name}}">
+        <label for="description">Description</label>
+        <textarea id="description" name="description">{{cat.description}}</textarea>
+        <label for="image">Image</label>
+        <input type="text" name="image" id="image" value="{{cat.image}}">
+        <label for="price">Price</label>
+        <input name="price" type="number" id="price" value="{{cat.price}}">
+        <label for="group">Breed</label>
+        <select id="group" name="breed">
+            <option value="{{cat.breed}}">{{cat.breed}}</option>
+                {{#each breeds}}
+                    <option value="{{this}}">{{this}}</option>
+                {{/each}}
+        </select>
+        <button type="submit">Edit Cat</button>
+    </form>
+</main>
