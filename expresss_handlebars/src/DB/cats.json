@@ -1,0 +1,26 @@
+[
+  {
+    "id": "0af4a5ad-5193-4317-83ac-8f9dd74aae53",
+    "name": "Leopardette",
+    "description": "Energetic, curious, affectionate, intelligent",
+    "breed": "American Polydactyl Cat",
+    "price": 1500,
+    "image": "https://cats.com/wp-content/uploads/2020/10/Bengal-Male-Cat-with-White-Fur-Standing-768x512.jpg"
+  },
+  {
+    "id": "622b69f6-30f0-448b-a018-5e1473ee1006",
+    "name": "Charlie",
+    "description": "Gentle, talkative, sociable, playful",
+    "breed": "Chantilly / Tiffany Cat",
+    "price": 400,
+    "image": "https://cats.com/wp-content/uploads/2020/10/Chantilly-Tiffanys.jpg"
+  },
+  {
+    "id": "02bf187b-4fed-4570-a3d9-3bb7aa905f2a",
+    "name": "Himmy",
+    "description": "Gentle, affectionate, family-friendly, sweet",
+    "breed": "Himalayan Cat",
+    "price": 300,
+    "image": "https://cats.com/wp-content/uploads/2020/10/Cute-blue-cream-colorpoint-persian-kitten-768x512.jpg"
+  }
+]

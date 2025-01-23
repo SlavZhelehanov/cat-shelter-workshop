@@ -1,11 +1,14 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
+import fs from 'node:fs';
 
 // DEFINE __dirname
 import path from 'path';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const catsPath = path.join(__dirname, "./DB/cats.json");
+const breedsPath = path.join(__dirname, "./DB/breeds.json");
 
 const app = express();
 
@@ -24,9 +27,9 @@ let cats = readData(catsPath);
 let breeds = readData(breedsPath);
 
 // MIDDLEWARES
-server.use(express.json());
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
-server.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 // SETUP VIEW ENGINE
 app.engine('hbs', engine({
@@ -44,6 +47,15 @@ app.get('/', (req, res) => { return res.render('home', { isHomePage: true }); })
 
 // ADD BREED
 app.get('/cats/add-breed', (req, res) => { return res.render('addBreed'); });
+app.post('/cats/add-breed', (req, res) => {
+    const breed = req.body.breed.trim();
+
+    if (0 < breed.length && !breeds.includes(breed)) {
+        breeds.push(breed);
+        writeData(breedsPath, breeds);
+    }
+    return res.redirect("/");
+});
 
 // ADD CAT
 app.get('/cats/add-cat', (req, res) => { return res.render('addCat'); });
