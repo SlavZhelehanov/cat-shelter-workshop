@@ -1,6 +1,7 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
 import fs from 'node:fs';
+import { v4 as uuid } from 'uuid';
 
 // DEFINE __dirname
 import path from 'path';
@@ -58,7 +59,22 @@ app.post('/cats/add-breed', (req, res) => {
 });
 
 // ADD CAT
-app.get('/cats/add-cat', (req, res) => { return res.render('addCat'); });
+app.get('/cats/add-cat', (req, res) => { return res.render('addCat', { breeds }); });
+app.post('/cats/add-cat', (req, res) => {
+    let cat = { id: uuid(), name: "", description: "", breed: "", price: 0, image: "" };
+
+    for (const key in cat) {
+        if (key != "id" && key === "price" && req.body[key]) cat[key] = +req.body[key].trim();
+        if (key != "id" && key != "price" && req.body[key]) cat[key] = req.body[key].trim();
+    }
+
+    if (0 < cat.name.length && 0 < cat.description.length && 0 < cat.breed.length && 0 < cat.price && 0 < cat.image.length) {
+        cats.push(cat);
+        writeData(catsPath, cats);
+        return res.redirect('/');
+    }
+    return res.render('addCat', { isHomePage: false, breeds, cat });
+});
 
 // 404 LIKE
 app.all("*", (req, res) => { return res.redirect('/'); });

@@ -22,5 +22,13 @@
     "breed": "Himalayan Cat",
     "price": 300,
     "image": "https://cats.com/wp-content/uploads/2020/10/Cute-blue-cream-colorpoint-persian-kitten-768x512.jpg"
+  },
+  {
+    "id": "d32f99f3-fff8-4ec4-8872-58e0844dbd57",
+    "name": "Burma",
+    "description": "Relaxed, affectionate, inquisitive, intelligent",
+    "breed": "Birman",
+    "price": 444,
+    "image": "https://cats.com/wp-content/uploads/2020/10/The-Birman.jpg"
   }
 ]
