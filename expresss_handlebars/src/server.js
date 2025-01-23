@@ -43,7 +43,7 @@ app.set('views', './src/views');
 
 // --------------------------------------- ROUTES ---------------------------------------
 // HOME
-app.get('/', (req, res) => { return res.render('home', { isHomePage: true }); });
+app.get('/', (req, res) => { return res.render('home', { isHomePage: true, cats }); });
 
 // ADD BREED
 app.get('/cats/add-breed', (req, res) => { return res.render('addBreed'); });
