@@ -16,14 +16,6 @@
     "image": "https://cats.com/wp-content/uploads/2020/10/Chantilly-Tiffanys.jpg"
   },
   {
-    "id": "02bf187b-4fed-4570-a3d9-3bb7aa905f2a",
-    "name": "Himmy",
-    "description": "Gentle, affectionate, family-friendly, sweet",
-    "breed": "Himalayan Cat",
-    "price": 300,
-    "image": "https://cats.com/wp-content/uploads/2020/10/Cute-blue-cream-colorpoint-persian-kitten-768x512.jpg"
-  },
-  {
     "id": "d32f99f3-fff8-4ec4-8872-58e0844dbd57",
     "name": "Burma",
     "description": "Relaxed, affectionate, inquisitive, intelligent",

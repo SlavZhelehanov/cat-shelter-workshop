@@ -82,6 +82,13 @@ app.get('/cats/:id/new-home', (req, res) => {
     if (!cat) return res.redirect('/404');
     return res.render('catShelter', { cat });
 });
+app.post('/cats/:id/new-home', (req, res) => {
+    const cat = cats.find(c => c.id === req.params.id);
+    if (!cat) return res.redirect('/404');
+    cats = cats.filter(c => c.id != req.params.id);
+    writeData(catsPath, cats);
+    return res.redirect('/');
+});
 
 // 404 LIKE
 app.all("*", (req, res) => { return res.redirect('/'); });
