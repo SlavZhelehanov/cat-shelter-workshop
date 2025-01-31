@@ -1,7 +1,7 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
-import fs from 'node:fs';
-import { v4 as uuid } from 'uuid';
+import mongoose from "mongoose";
+import routes from "./routes/index.js";
 
 // DEFINE __dirname
 import path from 'path';
@@ -11,21 +11,27 @@ const __dirname = path.dirname(__filename);
 const catsPath = path.join(__dirname, "./DB/cats.json");
 const breedsPath = path.join(__dirname, "./DB/breeds.json");
 
+try {
+    await mongoose.connect("mongodb://127.0.0.1:27017/cat_shelter_workshop");
+    console.log("DB is now connected");    
+} catch (error) {
+    console.error(error);    
+}
 const app = express();
 
-// HANDLE READING/WRITING TO DATABASE
-function readData(file) {
-    const data = fs.readFileSync(file);
-    return JSON.parse(data);
-}
+// // HANDLE READING/WRITING TO DATABASE
+// function readData(file) {
+//     const data = fs.readFileSync(file);
+//     return JSON.parse(data);
+// }
 
-function writeData(file, data) {
-    fs.writeFileSync(file, JSON.stringify(data, null, 2));
-}
+// function writeData(file, data) {
+//     fs.writeFileSync(file, JSON.stringify(data, null, 2));
+// }
 
-// GLOBAL VARIABLAS
-let cats = readData(catsPath);
-let breeds = readData(breedsPath);
+// // GLOBAL VARIABLAS
+// let cats = readData(catsPath);
+// let breeds = readData(breedsPath);
 
 // MIDDLEWARES
 app.use(express.json());
@@ -43,77 +49,79 @@ app.set('view engine', 'hbs');
 app.set('views', './src/views');
 
 // --------------------------------------- ROUTES ---------------------------------------
-// HOME
-app.get('/', (req, res) => { return res.render('home', { isHomePage: true, cats }); });
 
-// ADD BREED
-app.get('/cats/add-breed', (req, res) => { return res.render('addBreed'); });
-app.post('/cats/add-breed', (req, res) => {
-    const breed = req.body.breed.trim();
+app.use(routes);
+// // HOME
+// app.get('/', (req, res) => { return res.render('home', { isHomePage: true, cats }); });
 
-    if (0 < breed.length && !breeds.includes(breed)) {
-        breeds.push(breed);
-        writeData(breedsPath, breeds);
-    }
-    return res.redirect("/");
-});
+// // ADD BREED
+// app.get('/cats/add-breed', (req, res) => { return res.render('addBreed'); });
+// app.post('/cats/add-breed', (req, res) => {
+//     const breed = req.body.breed.trim();
 
-// ADD CAT
-app.get('/cats/add-cat', (req, res) => { return res.render('addCat', { breeds }); });
-app.post('/cats/add-cat', (req, res) => {
-    let cat = { id: uuid(), name: "", description: "", breed: "", price: 0, image: "" };
+//     if (0 < breed.length && !breeds.includes(breed)) {
+//         breeds.push(breed);
+//         writeData(breedsPath, breeds);
+//     }
+//     return res.redirect("/");
+// });
 
-    for (const key in cat) {
-        if (key != "id" && key === "price" && req.body[key]) cat[key] = +req.body[key].trim();
-        if (key != "id" && key != "price" && req.body[key]) cat[key] = req.body[key].trim();
-    }
+// // ADD CAT
+// app.get('/cats/add-cat', (req, res) => { return res.render('addCat', { breeds }); });
+// app.post('/cats/add-cat', (req, res) => {
+//     let cat = { id: uuid(), name: "", description: "", breed: "", price: 0, image: "" };
 
-    if (0 < cat.name.length && 0 < cat.description.length && 0 < cat.breed.length && 0 < cat.price && 0 < cat.image.length) {
-        cats.push(cat);
-        writeData(catsPath, cats);
-        return res.redirect('/');
-    }
-    return res.render('addCat', { breeds, cat });
-});
+//     for (const key in cat) {
+//         if (key != "id" && key === "price" && req.body[key]) cat[key] = +req.body[key].trim();
+//         if (key != "id" && key != "price" && req.body[key]) cat[key] = req.body[key].trim();
+//     }
 
-// DELETE CAT
-app.get('/cats/:id/new-home', (req, res) => {
-    const cat = cats.find(c => c.id === req.params.id);
-    if (!cat) return res.redirect('/404');
-    return res.render('catShelter', { cat });
-});
-app.post('/cats/:id/new-home', (req, res) => {
-    const cat = cats.find(c => c.id === req.params.id);
-    if (!cat) return res.redirect('/404');
-    cats = cats.filter(c => c.id != req.params.id);
-    writeData(catsPath, cats);
-    return res.redirect('/');
-});
+//     if (0 < cat.name.length && 0 < cat.description.length && 0 < cat.breed.length && 0 < cat.price && 0 < cat.image.length) {
+//         cats.push(cat);
+//         writeData(catsPath, cats);
+//         return res.redirect('/');
+//     }
+//     return res.render('addCat', { breeds, cat });
+// });
 
-// CHANGE INFO
-app.get('/cats/:id/change-info', (req, res) => {
-    const cat = cats.find(c => c.id === req.params.id);
-    if (!cat) return res.redirect('/404');
-    return res.render('editCat', { cat, breeds });
-});
-app.post('/cats/:id/change-info', (req, res) => {
-    const idx = cats.findIndex(u => u.id === req.params.id);
-    if (idx === -1) return res.redirect("/");
-    let cat = { name: "", description: "", breed: "", price: 0, image: "" };
+// // DELETE CAT
+// app.get('/cats/:id/new-home', (req, res) => {
+//     const cat = cats.find(c => c.id === req.params.id);
+//     if (!cat) return res.redirect('/404');
+//     return res.render('catShelter', { cat });
+// });
+// app.post('/cats/:id/new-home', (req, res) => {
+//     const cat = cats.find(c => c.id === req.params.id);
+//     if (!cat) return res.redirect('/404');
+//     cats = cats.filter(c => c.id != req.params.id);
+//     writeData(catsPath, cats);
+//     return res.redirect('/');
+// });
 
-    for (const key in cat) {
-        if (key === "price" && req.body[key]) cat[key] = +req.body[key].trim();
-        if (key != "price" && req.body[key]) cat[key] = req.body[key].trim();
-    }    
+// // CHANGE INFO
+// app.get('/cats/:id/change-info', (req, res) => {
+//     const cat = cats.find(c => c.id === req.params.id);
+//     if (!cat) return res.redirect('/404');
+//     return res.render('editCat', { cat, breeds });
+// });
+// app.post('/cats/:id/change-info', (req, res) => {
+//     const idx = cats.findIndex(u => u.id === req.params.id);
+//     if (idx === -1) return res.redirect("/");
+//     let cat = { name: "", description: "", breed: "", price: 0, image: "" };
 
-    if (0 < cat.name.length && 0 < cat.description.length && 0 < cat.breed.length && 0 < cat.price && 0 < cat.image.length) {
-        cats[idx] = { id: req.params.id, ...cat };
-        writeData(catsPath, cats);
-    }
-    return res.redirect('/');
-});
+//     for (const key in cat) {
+//         if (key === "price" && req.body[key]) cat[key] = +req.body[key].trim();
+//         if (key != "price" && req.body[key]) cat[key] = req.body[key].trim();
+//     }    
 
-// 404 LIKE
-app.all("*", (req, res) => { return res.redirect('/'); });
+//     if (0 < cat.name.length && 0 < cat.description.length && 0 < cat.breed.length && 0 < cat.price && 0 < cat.image.length) {
+//         cats[idx] = { id: req.params.id, ...cat };
+//         writeData(catsPath, cats);
+//     }
+//     return res.redirect('/');
+// });
+
+// // 404 LIKE
+// app.all("*", (req, res) => { return res.redirect('/'); });
 
 app.listen(3000, console.log("Server is listening on port: 3000"));
