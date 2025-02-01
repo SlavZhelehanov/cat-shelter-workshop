@@ -53,4 +53,18 @@ catRouter.post('/add-breed', async (req, res) => {
     return res.redirect("/cats/add-breed");
 });
 
+// DELETE CAT
+catRouter.get('/:id/new-home', async (req, res) => {
+    const cat = await catService.getOneCat(req.params.id);
+    if (!cat) return res.redirect('/404');
+    return res.render('catShelter', { cat });
+});
+// catRouter.post('/:id/new-home', (req, res) => {
+//     const cat = cats.find(c => c.id === req.params.id);
+//     if (!cat) return res.redirect('/404');
+//     cats = cats.filter(c => c.id != req.params.id);
+//     writeData(catsPath, cats);
+//     return res.redirect('/');
+// });
+
 export default catRouter;
