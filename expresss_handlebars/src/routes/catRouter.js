@@ -10,8 +10,14 @@ catRouter.get('/add-cat', async (req, res) => {
     return res.render('addCat', { breeds });
 });
 catRouter.post('/add-cat', async (req, res) => {
-    const cats = await catService.getAllCats();
-    return res.render('home', { isHomePage: true, cats });
+    let { name, description, price, image, breed } = req.body;
+    name = name.trim(); description = description.trim(); price = +price.trim();
+    image = image.trim(); breed = breed.trim();
+
+    if (!name || !description || !price || price < 0 || !image || !breed) return res.redirect("/cats/add-cat");
+   
+    const cats = await catService.addCat({ name, description, price, image, breed });
+    return res.redirect('/');
 });
 
 // ADD BREED
