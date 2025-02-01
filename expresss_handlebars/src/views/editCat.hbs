@@ -13,7 +13,7 @@
         <select id="group" name="breed">
             <option value="{{cat.breed}}">{{cat.breed}}</option>
                 {{#each breeds}}
-                    <option value="{{this}}">{{this}}</option>
+                    {{> breed}}
                 {{/each}}
         </select>
         <button type="submit">Edit Cat</button>

@@ -20,5 +20,8 @@ export default {
     },
     getOneCat(id) {
         return Cat.findById(id);
+    },
+    updateCatInfo(id, cat) {
+        return Cat.findByIdAndUpdate(id, cat);
     }
 };

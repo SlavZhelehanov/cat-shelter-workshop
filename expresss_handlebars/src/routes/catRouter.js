@@ -23,26 +23,23 @@ catRouter.post('/add-cat', async (req, res) => {
 catRouter.get('/:id/change-info', async (req, res) => {
     const cat = await catService.getOneCat(req.params.id);
     const breeds = await catService.getAllBreeds();
-    
+
     if (!cat) return res.redirect('/404');
     return res.render('editCat', { cat, breeds });
 });
-// catRouter.post('/cats/:id/change-info', (req, res) => {
-//     const idx = cats.findIndex(u => u.id === req.params.id);
-//     if (idx === -1) return res.redirect("/");
-//     let cat = { name: "", description: "", breed: "", price: 0, image: "" };
+catRouter.post('/:id/change-info', async (req, res) => {
+    let cat = { name: "", description: "", breed: "", price: 0, image: "" };
 
-//     for (const key in cat) {
-//         if (key === "price" && req.body[key]) cat[key] = +req.body[key].trim();
-//         if (key != "price" && req.body[key]) cat[key] = req.body[key].trim();
-//     }    
+    for (const key in cat) {
+        if (key === "price" && req.body[key]) cat[key] = +req.body[key].trim();
+        if (key != "price" && req.body[key]) cat[key] = req.body[key].trim();
+    }
 
-//     if (0 < cat.name.length && 0 < cat.description.length && 0 < cat.breed.length && 0 < cat.price && 0 < cat.image.length) {
-//         cats[idx] = { id: req.params.id, ...cat };
-//         writeData(catsPath, cats);
-//     }
-//     return res.redirect('/');
-// });
+    if (0 < cat.name.length && 0 < cat.description.length && 0 < cat.breed.length && 0 < cat.price && 0 < cat.image.length) {
+        await catService.updateCatInfo(req.params.id, cat);
+    }
+    return res.redirect('/');
+});
 
 // ADD BREED
 catRouter.get('/add-breed', (req, res) => {
