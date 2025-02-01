@@ -23,5 +23,8 @@ export default {
     },
     updateCatInfo(id, cat) {
         return Cat.findByIdAndUpdate(id, cat);
+    },
+    removeOneCat(id) {
+        return Cat.findByIdAndDelete(id);
     }
 };
