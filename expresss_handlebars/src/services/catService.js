@@ -14,5 +14,11 @@ export default {
         const newBreed = new Breed({ breed });
         await newBreed.save();
         return newBreed;
+    },
+    getAllCats() {
+        return Cat.find({});
+    },
+    getOneCat(id) {
+        return Cat.findById(id);
     }
 };

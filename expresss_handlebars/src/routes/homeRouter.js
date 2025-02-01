@@ -1,10 +1,10 @@
 import { Router } from "express";
-import homeService from "../services/homeService.js";
+import catService from "../services/catService.js";
 
 const homeRouter = Router();
 
 homeRouter.get('/', async (req, res) => { 
-    const cats = await homeService.getAllCats();
+    const cats = await catService.getAllCats();
     return res.render('home', { isHomePage: true, cats }); 
 });
 
