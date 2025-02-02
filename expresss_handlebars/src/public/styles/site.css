@@ -31,12 +31,8 @@ html, body {
     padding: 5px;
 }
 
-/* .navigation li:nth-child(2) a::before {
-    content: "\f055";   
-} */
-
 .navigation .add-breed a::before{
-    content: "\f2f5";   
+    content: "\f055";   
 }
 
 .navigation .add-cat a::before{
