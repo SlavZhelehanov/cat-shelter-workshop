@@ -5,7 +5,8 @@
     padding: 0;
 }
 
-html, body {
+html,
+body {
     font-family: 'Lato', sans-serif;
     background-color: #F2F2F2;
     color: #333;
@@ -31,24 +32,24 @@ html, body {
     padding: 5px;
 }
 
-.navigation .add-breed a::before{
-    content: "\f055";   
+.navigation .add-breed a::before {
+    content: "\f055";
 }
 
-.navigation .add-cat a::before{
-    content: "\f1b0";   
+.navigation .add-cat a::before {
+    content: "\f1b0";
 }
 
-.navigation .sign-in a::before{
-    content: "\f2f6";   
+.navigation .sign-in a::before {
+    content: "\f2f6";
 }
 
-.navigation .sign-up a::before{
-    content: "\f234";   
+.navigation .sign-up a::before {
+    content: "\f234";
 }
 
-.navigation .sign-out a::before{
-    content: "\f2f5";   
+.navigation .sign-out a::before {
+    content: "\f2f5";
 }
 
 h1 {
@@ -63,10 +64,15 @@ form {
     margin-top: 1rem;
 }
 
-input[type=text], input[type="file"], input[type="email"], input[type="number"], textarea, select {
+input[type=text],
+input[type="file"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
     padding: 0.5rem 7.5rem 0.5rem 1rem;
     border-radius: 7px;
-    border: none ;
+    border: none;
     outline: none;
     margin-bottom: 1rem;
 }
@@ -128,14 +134,14 @@ form button:hover {
     margin-top: 1.5rem;
     position: relative;
     left: 1rem;
-    border:1px splid black;
+    border: 1px splid black;
 }
 
 .buttons li {
     margin-left: 2rem;
 }
 
-.cats ul li .buttons .btn a{
+.cats ul li .buttons .btn a {
     text-align: center;
     padding: 5px;
     border-radius: 17px;
@@ -146,11 +152,11 @@ form button:hover {
 }
 
 
-.cats ul li .buttons .edit a{
+.cats ul li .buttons .edit a {
     background-color: #3d99e3;
 }
 
-.cats ul li .buttons .delete a{
+.cats ul li .buttons .delete a {
     background-color: #ff0000d6;
 }
 
@@ -171,7 +177,7 @@ form button:hover {
     border-radius: 7px;
 }
 
-body > form > label:nth-child(3) {
+body>form>label:nth-child(3) {
     margin-top: 1.5rem;
 }
 
@@ -211,7 +217,7 @@ body > form > label:nth-child(3) {
     margin: 0 0 0.3rem 0.3rem;
 }
 
-.cat-form button{
+.cat-form button {
     width: 100px;
     margin: auto;
     text-align: center;
@@ -223,4 +229,15 @@ body > form > label:nth-child(3) {
     text-transform: uppercase;
     background-color: lightskyblue;
     margin-bottom: 1.5rem;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered-404 {
+    max-width: 100%;
+    max-height: 100%;
 }

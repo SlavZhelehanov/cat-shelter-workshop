@@ -11,6 +11,6 @@ router.use("/cats", catRouter);
 
 router.use("/users", userRouter);
 
-router.all("*", (req, res) => { return res.redirect('/'); });
+router.all("*", (req, res) => { return res.render('404'); });
 
 export default router;
