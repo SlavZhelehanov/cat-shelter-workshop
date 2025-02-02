@@ -2,15 +2,18 @@
     <nav>
         <ul class="navigation">
             <li><a href="/">Home Page</a></li>
-            <li><a href="/cats/add-breed">Add Breed</a></li>
-            <li><a href="/cats/add-cat">Add Cat</a></li>
+            <li class="add-breed"><a href="/cats/add-breed">Add Breed</a></li>
+            <li class="add-cat"><a href="/cats/add-cat">Add Cat</a></li>
+            <li class="sign-in"><a href="/users/sign-in">Sign In</a></li>
+            <li class="sign-up"><a href="/users/sign-up">Sign Up</a></li>
+            <li class="sign-out"><a href="/users/sign-out">Sign Out</a></li>
         </ul>
     </nav>
     <h1>Cat Shelter</h1>
     {{#if isHomePage}}
-        <form action="/search" method="get">
-            <input type="text" name="search">
-            <button type="submit">Search</button>
-        </form>
+    <form action="/search" method="get">
+        <input type="text" name="search">
+        <button type="submit">Search</button>
+    </form>
     {{/if}}
 </header>

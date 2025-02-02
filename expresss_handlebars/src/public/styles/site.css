@@ -31,20 +31,28 @@ html, body {
     padding: 5px;
 }
 
-.navigation li:nth-child(2) a::before {
+/* .navigation li:nth-child(2) a::before {
     content: "\f055";   
+} */
+
+.navigation .add-breed a::before{
+    content: "\f2f5";   
 }
 
-.navigation li:nth-child(3) a::before {
-    content: "\f1b0";
+.navigation .add-cat a::before{
+    content: "\f1b0";   
 }
 
-.navigation li:nth-child(4) a::before {
-    content: "\f2f6";
+.navigation .sign-in a::before{
+    content: "\f2f6";   
 }
 
-.navigation li:nth-child(5) a::before {
-    content: "\f234";
+.navigation .sign-up a::before{
+    content: "\f234";   
+}
+
+.navigation .sign-out a::before{
+    content: "\f2f5";   
 }
 
 h1 {
