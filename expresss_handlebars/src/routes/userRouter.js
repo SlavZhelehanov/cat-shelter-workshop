@@ -17,8 +17,20 @@ userRouter.post('/sign-up', middlewares.isGuest, async (req, res) => {
 });
 
 // LOGIN
-homeRouter.get('/sign-in', (req, res) => { 
-    return res.render('user/login', { isAuth: false }); 
+userRouter.get('/sign-in', middlewares.isGuest, (req, res) => {
+    return res.render('user/login', { isAuth: false });
+});
+userRouter.post('/sign-in', middlewares.isGuest, async (req, res) => {
+    const data = await userService.login(req.body);
+    if (data.message) console.log(data.message);
+    else middlewares.sign({ id: data }, res);
+    return res.redirect("/");
 });
 
-export default homeRouter;
+// LOGOUT
+userRouter.delete('/sign-out', middlewares.isUser, (req, res) => {
+    res.clearCookie(constants.COOKIE_NAME);
+    return res.redirect("/");
+});
+
+export default userRouter;

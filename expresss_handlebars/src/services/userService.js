@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
+
 export default {
     async register(data) {
         try {
@@ -7,4 +8,15 @@ export default {
             return await User.create({ ...data, password });
         } catch (error) { return error; }
     },
+    async login(data) {
+        try {
+            const user = await User.findOne({ email: data.email });
+            if (!user) throw new Error("Wrong credentials!");
+
+            const result = await bcrypt.compare(data.password, user.password);
+            if (!result) throw new Error("Wrong credentials!");
+
+            return user._id;
+        } catch (error) { return error; }
+    }
 };
