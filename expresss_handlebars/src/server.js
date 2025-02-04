@@ -2,6 +2,8 @@ import express from 'express';
 import { engine } from 'express-handlebars';
 import mongoose from "mongoose";
 import routes from "./routes/index.js";
+import constants from "./util/constants.js";
+import middlewares from "./util/middlewares.js";
 import cookieParser from "cookie-parser";
 
 // DEFINE __dirname
@@ -23,6 +25,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
+app.use(middlewares.verify);
+app.use(middlewares.methoOverride);
 
 // SETUP VIEW ENGINE
 app.engine('hbs', engine({
