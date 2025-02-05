@@ -23,8 +23,10 @@ catRouter.post('/add-cat', middlewares.isUser, async (req, res) => {
 
 // DETAILS
 catRouter.get("/:id/details", async (req, res) => {
-    const { name, image, price, description, breed } = await catService.getOneCat(req.params.id);
-    return res.render("cat/details", { id: req.params.id, name, image, price, description, breed });
+    const { name, image, price, description, breed, creator } = await catService.getOneCat(req.params.id);
+    const isCreator = req.user ? creator.equals(req.user.id) : false;
+
+    return res.render("cat/details", { isAuth: req.user, id: req.params.id, name, image, price, description, breed, isCreator });
 });
 
 // CHANGE INFO

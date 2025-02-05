@@ -152,6 +152,24 @@ form button:hover {
     margin-bottom: 1rem;
 }
 
+.cats .cat-details li .buttons .btn a {
+    text-align: center;
+    padding: 5px;
+    border-radius: 17px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.cats .cat-details li .buttons .edit a {
+    background-color: #3d99e3;
+}
+
+.cats .cat-details li .buttons .delete a {
+    background-color: #ff0000d6;
+}
+
 
 .cats ul li .buttons .edit a {
     background-color: #3d99e3;
@@ -161,6 +179,9 @@ form button:hover {
     background-color: #ff0000d6;
 }
 
+.cats ul li .buttons .details a {
+    background-color: #ffc400d6;
+}
 
 .cats li img {
     width: 350px;
