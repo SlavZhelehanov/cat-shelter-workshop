@@ -7,7 +7,7 @@ const catRouter = Router();
 // ADD CAT
 catRouter.get('/add-cat', middlewares.isUser, async (req, res) => {
     const breeds = await catService.getAllBreeds();
-    return res.render('addCat', { breeds, isAuth: req.user });
+    return res.render('cat/addCat', { breeds, isAuth: req.user });
 });
 catRouter.post('/add-cat', middlewares.isUser, async (req, res) => {
     let { name, description, price, image, breed } = req.body;
@@ -21,13 +21,19 @@ catRouter.post('/add-cat', middlewares.isUser, async (req, res) => {
     return res.redirect('/');
 });
 
+// DETAILS
+catRouter.get("/:id/details", async (req, res) => {
+    const { name, image, price, description, breed } = await catService.getOneCat(req.params.id);
+    return res.render("cat/details", { id: req.params.id, name, image, price, description, breed });
+});
+
 // CHANGE INFO
 catRouter.get('/:id/change-info', middlewares.isUser, async (req, res) => {
     const cat = await catService.getOneCat(req.params.id);
     const breeds = await catService.getAllBreeds();
 
-    if (!cat) return res.redirect('/404');
-    return res.render('editCat', { cat, breeds, isAuth: req.user });
+    if (!cat || !cat.creator.equals(req.user.id)) return res.redirect('/404');
+    return res.render('cat/editCat', { cat, breeds, isAuth: req.user });
 });
 catRouter.post('/:id/change-info', middlewares.isUser, async (req, res) => {
     let cat = { name: "", description: "", breed: "", price: 0, image: "" };
@@ -47,7 +53,7 @@ catRouter.post('/:id/change-info', middlewares.isUser, async (req, res) => {
 
 // ADD BREED
 catRouter.get('/add-breed', middlewares.isUser, (req, res) => {
-    return res.render('addBreed', { isAuth: req.user });
+    return res.render('cat/addBreed', { isAuth: req.user });
 });
 catRouter.post('/add-breed', middlewares.isUser, async (req, res) => {
     if (req.body.breed && typeof req.body.breed === "string" && 0 < req.body.breed.length) {
@@ -60,12 +66,12 @@ catRouter.post('/add-breed', middlewares.isUser, async (req, res) => {
 // DELETE CAT
 catRouter.get('/:id/new-home', middlewares.isUser, async (req, res) => {
     const cat = await catService.getOneCat(req.params.id);
-    if (!cat) return res.redirect('/404');
-    return res.render('catShelter', { cat, isAuth: req.user });
+    if (!cat || !cat.creator.equals(req.user.id)) return res.redirect('/404');
+    return res.render('cat/catShelter', { cat, isAuth: req.user });
 });
 catRouter.post('/:id/new-home', middlewares.isUser, async (req, res) => {
     const cat = await catService.getOneCat(req.params.id);
-    if (!cat) return res.redirect('/404');
+    if (!cat || !cat.creator.equals(req.user.id)) return res.redirect('/404');
     await catService.removeOneCat(req.params.id);
     return res.redirect('/');
 });
