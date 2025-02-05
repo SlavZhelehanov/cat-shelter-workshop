@@ -6,12 +6,12 @@
     
     <ul class="buttons">
         {{#if isHomePage}}
-            <li class="btn details"><a href="/cats/{{_id}}/details">Details</a></li>
+            <li class="btn details"><a href="/cats/{{id}}/details">Details</a></li>
         {{else}}
             <p><span>Description: </span>{{description}}</p>
             {{#if isCreator}}
-                <li class="btn edit"><a href="/cats/{{_id}}/change-info">Change Info</a></li>
-                <li class="btn delete"><a href="/cats/{{_id}}/new-home">New Home</a></li>
+                <li class="btn edit"><a href="/cats/{{id}}/change-info">Change Info</a></li>
+                <li class="btn delete"><a href="/cats/{{id}}/new-home">New Home</a></li>
             {{/if}}
         {{/if}}
     </ul>
