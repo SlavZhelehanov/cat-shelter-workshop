@@ -29,7 +29,7 @@ export default {
     },
     isUser(req, res, next) {
         if (req.user) return next();
-        return res.redirect("/users/login");
+        return res.redirect("/users/sign-in");
     },
     isGuest(req, res, next) {
         if (req.user) return res.redirect("/");
