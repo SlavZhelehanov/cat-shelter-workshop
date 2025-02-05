@@ -9,4 +9,14 @@ export default {
         if (confirm != undefined && confirm != password) messages.push("Repeat password must mach password");
         return messages;
     },
+    createEditCat({ name, description, breed, price, image }) {
+        let messages = [];
+
+        if (name.length < 1) messages.push("Cat's name is required");
+        if (description.length < 1) messages.push("Cat's description is required");
+        if (breed.length < 1) messages.push("Cat's breed is required");
+        if (price <= 0) messages.push("Price must be larger than 0");
+        if (image.length < 1) messages.push("Cat's image is required");
+        return messages;
+    }
 }
