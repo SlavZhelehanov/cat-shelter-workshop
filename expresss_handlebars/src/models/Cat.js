@@ -6,5 +6,5 @@ export default mongoose.model("Cat", new mongoose.Schema({
     breed: { type: String, required: [true, "Breed field can't be empty"] },
     price: { type: Number, min: [0, "Price must be larger than 0"] },
     image: { type: String, required: [true, "Image field can't be empty"] },
-    create: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
+    creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 }, { timestamps: true }));
